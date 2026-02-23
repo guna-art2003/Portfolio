@@ -83,28 +83,44 @@ const typed = new Typed('.multiple-text', {
 
 const contactForm = document.querySelector('.contact form');
 
-contactForm.addEventListener('submit', function (e) {
-    e.preventDefault();
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    const templateParams = {
-        full_name: contactForm.querySelector('input[placeholder="Full Name"]').value,
-        email: contactForm.querySelector('input[placeholder="Email Address"]').value,
-        mobile: contactForm.querySelector('input[placeholder="Mobile Number"]').value,
-        subject: contactForm.querySelector('input[placeholder="Email Subject"]').value,
-        message: contactForm.querySelector('textarea').value
-    };
+        // Validate inputs
+        const fullName = contactForm.querySelector('input[placeholder="Full Name"]').value.trim();
+        const email = contactForm.querySelector('input[placeholder="Email Address"]').value.trim();
+        const mobile = contactForm.querySelector('input[placeholder="Mobile Number"]').value.trim();
+        const subject = contactForm.querySelector('input[placeholder="Email Subject"]').value.trim();
+        const message = contactForm.querySelector('textarea').value.trim();
 
-    emailjs.send(
-        "service_j3g89zh",   // 🔴 Replace this
-        "template_626ds7c",  // 🔴 Replace this
-        templateParams
-    )
-    .then(() => {
-        alert("Message sent successfully!");
-        contactForm.reset();
-    })
-    .catch((error) => {
-        alert("Failed to send message. Try again.");
-        console.error(error);
+        if (!fullName || !email || !mobile || !subject || !message) {
+            alert("Please fill in all fields");
+            return;
+        }
+
+        const templateParams = {
+            full_name: fullName,
+            email: email,
+            mobile: mobile,
+            subject: subject,
+            message: message
+        };
+
+        emailjs.send(
+            "service_esr6k2r",   // 🔴 Replace this
+            "template_626ds7c",  // 🔴 Replace this
+            templateParams
+        )
+        .then(() => {
+            alert("Message sent successfully!");
+            contactForm.reset();
+        })
+        .catch((error) => {
+            console.error("EmailJS Error:", error);
+            alert("Failed to send message. Error: " + (error.text || error.message || "Unknown error"));
+        });
     });
-});
+} else {
+    console.warn("Contact form not found");
+}
