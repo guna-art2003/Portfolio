@@ -1,34 +1,30 @@
-/*togglebar*/
+/* togglebar */
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
-// Function to toggle the navbar visibility
 const toggleNavbar = () => {
     menuIcon.classList.toggle('fa-x');
     navbar.classList.toggle('active');
 };
 
-// Add click event to menu icon
 menuIcon.onclick = () => {
     toggleNavbar();
 };
 
-// Function to close the navbar
 const closeNavbar = () => {
     menuIcon.classList.remove('fa-x');
     navbar.classList.remove('active');
 };
 
-// Add click events to all nav links to close the navbar on click (for mobile view)
 document.querySelectorAll('header nav a').forEach(link => {
     link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) { // Adjust the width as needed
+        if (window.innerWidth <= 768) {
             closeNavbar();
         }
     });
 });
 
-/*scroll*/
+/* scroll */
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
 
@@ -41,25 +37,21 @@ window.onscroll = () => {
         let id = sec.getAttribute('id');
 
         if (top >= offset && top < offset + height) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
+            navLinks.forEach(link => link.classList.remove('active'));
             document.querySelector(`header nav a[href*=${id}]`).classList.add('active');
         }
     });
 
-    /*sticky navbar*/
     let header = document.querySelector('header');
     header.classList.toggle('sticky', window.scrollY > 100);
 
-    /*removetoggle*/
-    if (window.innerWidth > 768) { // Only remove toggle on larger screens
+    if (window.innerWidth > 768) {
         menuIcon.classList.remove('fa-x');
         navbar.classList.remove('active');
     }
 };
 
-/*scroll reveal*/
+/* scroll reveal */
 ScrollReveal({
     distance: '80px',
     duration: 2000,
@@ -71,11 +63,48 @@ ScrollReveal().reveal('.home-img, .services-container, .projects-box, .certify-b
 ScrollReveal().reveal('.home-contact h1, .about-img', { origin: 'left' });
 ScrollReveal().reveal('.home-contact p, .about-content', { origin: 'right' });
 
-/*typed js*/
+/* typed js */
 const typed = new Typed('.multiple-text', {
     strings: ['SAP FICO consultant', 'Workflow Specialist'],
     typeSpeed: 70,
     backSpeed: 70,
     backDelay: 1000,
     loop: true,
+});
+
+/* ===============================
+   EMAILJS CONTACT FORM LOGIC
+================================ */
+
+// Initialize EmailJS
+(function () {
+    emailjs.init("hZ-8hnJXjdOyqewHn"); // 🔴 Replace this
+})();
+
+const contactForm = document.querySelector('.contact form');
+
+contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const templateParams = {
+        full_name: contactForm.querySelector('input[placeholder="Full Name"]').value,
+        email: contactForm.querySelector('input[placeholder="Email Address"]').value,
+        mobile: contactForm.querySelector('input[placeholder="Mobile Number"]').value,
+        subject: contactForm.querySelector('input[placeholder="Email Subject"]').value,
+        message: contactForm.querySelector('textarea').value
+    };
+
+    emailjs.send(
+        "service_j3g89zh",   // 🔴 Replace this
+        "template_626ds7c",  // 🔴 Replace this
+        templateParams
+    )
+    .then(() => {
+        alert("Message sent successfully!");
+        contactForm.reset();
+    })
+    .catch((error) => {
+        alert("Failed to send message. Try again.");
+        console.error(error);
+    });
 });
