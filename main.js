@@ -1,126 +1,330 @@
-/* togglebar */
-let menuIcon = document.querySelector('#menu-icon');
-let navbar = document.querySelector('.navbar');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 
-const toggleNavbar = () => {
-    menuIcon.classList.toggle('fa-x');
-    navbar.classList.toggle('active');
-};
 
-menuIcon.onclick = () => {
-    toggleNavbar();
-};
+    <!--FONT AWESOME-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-const closeNavbar = () => {
-    menuIcon.classList.remove('fa-x');
-    navbar.classList.remove('active');
-};
+</head>
+<body>
+    <!--HEADER-->
+    <header class="header">
+        <a href="#" class="logo"><span>P</span>ortFolio</a>
 
-document.querySelectorAll('header nav a').forEach(link => {
-    link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-            closeNavbar();
-        }
-    });
-});
+        <i class="fa-solid fa-bars" id="menu-icon"></i>
 
-/* scroll */
-let sections = document.querySelectorAll('section');
-let navLinks = document.querySelectorAll('header nav a');
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#certify">Certifications</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-window.onscroll = () => {
-    let top = window.scrollY;
+    <!--Home section-->
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hi,I'm</h3>
+            <h1>Gunasekaran R</h1>
+            <h3>And I'm a <span class="multiple-text"></span></h3>
+            <p> SAP FICO consultant</p>
+           
 
-    sections.forEach(sec => {
-        let offset = sec.offsetTop - 150;
-        let height = sec.offsetHeight;
-        let id = sec.getAttribute('id');
+            <div class="social-media">
+              <a href="https://www.linkedin.com/in/gunasekaran2903/"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="https://github.com/guna-art2003"><i class="fa-brands fa-github"></i></a>
+              <a href="https://www.instagram.com/thisisguna_/"><i class="fa-brands fa-instagram"></i></a>
+              <!-- <a href="https://twitter.com/harisanu03?t=GpSPh3oRb_mtKr8QPxxuBg&s=09"><i class="fa-brands fa-twitter"></i></a> -->
+              <!-- <a href="https://www.facebook.com/hari.ish.92?mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a> -->
+            </div>
+            <a href="./images/Gunasekaran RESUME.pdf" class="btn">Download CV</a>
+        </div>
+        <div class="home-img">
+            <img src="./images/guna.png" alt="about">
+        </div>
+    </section>
 
-        if (top >= offset && top < offset + height) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            document.querySelector(`header nav a[href*=${id}]`).classList.add('active');
-        }
-    });
+     <!--About section-->
+     <section class="about" id="about">
+        <div class="about-img">
+            <img src="./images/guna 2 (1).jpeg" alt="">
+        </div>
 
-    let header = document.querySelector('header');
-    header.classList.toggle('sticky', window.scrollY > 100);
+        <div class="about-content">
+      <h2 class="heading">About <span>Me</span></h2>
+      <h3>SAP FICO consultant</h3>
+      <p> "I am Gunasekaran R, a 23-year-old professional with 2.5 years of experience at TCS. During my tenure, I worked in enterprise-level environments, gaining a deep understanding of business processes, client handling, and system discipline. Additionally, I have completed the SAP FICO Global Certification, which has strengthened my hands-on expertise in GL, AP, 
+            AR, Asset Accounting, and Cost Center Accounting, as well as integration with MM and SD modules.</p>
+      <a href="#" class="btn">Read More</a>
+        </div>
+     </section>
 
-    if (window.innerWidth > 768) {
-        menuIcon.classList.remove('fa-x');
-        navbar.classList.remove('active');
-    }
-};
+     <!--Services section-->
 
-/* scroll reveal */
-ScrollReveal({
-    distance: '80px',
-    duration: 2000,
-    delay: 200,
-});
+     <section class="services" id="services">
+        <h2 class="heading">My <span>Experience</span></h2>
+        <div class="services-container">
+            <div class="services-box">
+                <i class='fas fa-palette'></i>
+                <h3>Workflow Specialist | Tata Consultancy Services | Jul 2023 – Feb 2026</h3>
+                <p>• Supported CITI bank’s operations involving savings, credit, and loan products, ensuring accuracy and compliance
+                     with banking standards and SLAS. <br>
+                    • Analyzed backend financial transaction data aligned with sap fi processes to support reconciliation, exception
+                    handling, and operational accuracy. <br>• Collaborated with cross-functional teams to optimize ERP-based workflows and improve service efficiency.
+                     <br>• Automated data validation and reporting processes using advanced excel (macros, formulas, pivot tables), integrated
+                    with sap fi postings, reducing manual effort. <br>
+                    • Contributed to process improvement initiatives resulting in enhanced efficiency, accuracy, and SLA adherence.SAP FICO certification, financial process expertise, and advanced analytical skills. Committed to delivering
+                    measurable improvements, driving innovation, and contributing to long-term organizational growth    </p>
+                <a href="#" class="btn">Read More</a>
+            </div>
 
-ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
-ScrollReveal().reveal('.home-img, .services-container, .projects-box, .certify-box, .contact form', { origin: 'bottom' });
-ScrollReveal().reveal('.home-contact h1, .about-img', { origin: 'left' });
-ScrollReveal().reveal('.home-contact p, .about-content', { origin: 'right' });
+            <!-- <div class="services-box">
+                <i class="fa-brands fa-figma"></i>
+                <h3>UI/UX Design</h3>
+                <p>As a UI/UX designer, I focus on understanding the needs and behaviors of users to craft interfaces that are not only visually appeal intuitive and easy.</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
 
-/* typed js */
-const typed = new Typed('.multiple-text', {
-    strings: ['SAP FICO consultant', 'Workflow Specialist'],
-    typeSpeed: 70,
-    backSpeed: 70,
-    backDelay: 1000,
-    loop: true,
-});
+            <div class="services-box">
+                <i class="fa-solid fa-code"></i>
+                <h3>Web Developement</h3>
+                <p> I am passionate about bringing ideas to life on the web. I specialize in building responsive, robust, and scalable websites that deliver exceptional user experiences. </p>
+                <a href="#" class="btn">Read More</a>
+            </div> -->
 
-/* ===============================
-   EMAILJS CONTACT FORM LOGIC
-================================ */
+        </div>
+     </section>
 
-// Initialize EmailJS
-(function () {
-    emailjs.init("hZ-8hnJXjdOyqewHn"); // 🔴 Replace this
-})();
 
-const contactForm = document.querySelector('.contact form');
 
-if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+     <!--Skills sections-->
 
-        // Validate inputs
-        const fullName = contactForm.querySelector('input[placeholder="Full Name"]').value.trim();
-        const email = contactForm.querySelector('input[placeholder="Email Address"]').value.trim();
-        const mobile = contactForm.querySelector('input[placeholder="Mobile Number"]').value.trim();
-        const subject = contactForm.querySelector('input[placeholder="Email Subject"]').value.trim();
-        const message = contactForm.querySelector('textarea').value.trim();
+     <section id="skills" class="skills">
+        <h2 class="heading">My <span>Skills</span></h2>
+        <div class="skill">
+            <p>SAP S/4HANA FICO</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 90%;">80%</div>
+            </div>
+        </div>
+        <div class="skill">
+            <p>SQL (Basic Queries, Data Handling)</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 70%;">70%</div>
+            </div>
+        </div>
+        <div class="skill">
+            <p>Power BI (Basic Dashboards & Visualizations)</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 60%;">60%</div>
+            </div>
+        </div>
+        <div class="skill">
+            <p>MS Excel(Pivot Tables, Formulas, Macros,Reporting)</p>
 
-        if (!fullName || !email || !mobile || !subject || !message) {
-            alert("Please fill in all fields");
-            return;
-        }
+            <div class="progress-bar">
+                <div class="progress" style="width: 50%;">50%</div>
+            </div>
+        </div>
+        <div class="skill">
+            <p>Java</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 60%;">60%</div>
+            </div>
+        </div>
+        <div class="skill">
+            <p>CSS</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 70%;">70%</div>
+            </div>
+        </div>
+        <!-- <div class="skill">
+            <p>Figma</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 75%;">75%</div> -->
+            </div>
+        </div>
+        <!-- Add more skills as needed -->
+    </section>
 
-        const templateParams = {
-            full_name: fullName,
-            email: email,
-            mobile: mobile,
-            subject: subject,
-            message: message
-        };
+     <!--Projects section-->
 
-        emailjs.send(
-            "service_esr6k2r",   // 🔴 Replace this
-            "template_626ds7c",  // 🔴 Replace this
-            templateParams
-        )
-        .then(() => {
-            alert("Message sent successfully!");
-            contactForm.reset();
-        })
-        .catch((error) => {
-            console.error("EmailJS Error:", error);
-            alert("Failed to send message. Error: " + (error.text || error.message || "Unknown error"));
-        });
-    });
-} else {
-    console.warn("Contact form not found");
-}
+     <section class="projects" id="projects">
+     <h2 class="heading">My <span>Projects</span></h2>
+
+        <div class="projects-container">
+            <div class="projects-box">
+                <img src="./images/1.jpg" alt="">
+                <div class="projects-layer">
+                    
+                    <h4>Smart and Secure voting system</h4>
+                    <p>The project is developed by using ASP.Net as the front end tool and SQL Server as the back end tool</p>
+                    <a href="#">View Project</a>
+                </div>
+            </div>
+<!-- 
+            <div class="projects-box">
+                <img src="./images/2.jpg" alt="">
+                <div class="projects-layer">
+                   
+                    <h4>To do App</h4>
+                    <p>Developed using : HTML,CSS,JAVASCRIPT</p>
+                    <a href="https://github.com/harisanu787/To-Do">View Project</a>
+            </div>
+            </div> -->
+
+            <div class="projects-box">
+                <img src="./images/3.jpg" alt="">
+                <div class="projects-layer">
+                   
+                    <h4>Personal Portfolio</h4>
+                    <p>Developed using : HTML,CSS,JAVASCRIPT</p>
+                    <a href="https://github.com/guna-art2003/portfolio">View Project</a>
+                </div>
+            </div>
+
+            <!-- <div class="projects-box">
+                <img src="./images/4.jpg" alt="">
+                <div class="projects-layer">
+                   
+                    <h4>Text to Speech</h4>
+                    <p>Developed using : HTML,CSS,JAVASCRIPT</p>
+                    <a href="https://github.com/harisanu787/text-to-talk">View Project</a>
+                </div>
+            </div> -->
+
+        </div>
+    </section>
+
+     <!--Certifications section-->
+
+     <section class="certify" id="certify">
+        <h2 class="heading">My <span>Certifications</span></h2>
+   
+           <div class="certify-container">
+               <div class="certify-box">
+                   <img src="./images/4.jpg" alt="">
+                   <div class="certify-layer">
+                       
+                       <h4>SAP FICO</h4>
+                       <p>SAP Certified Associate - SAP S/4HANA Cloud Private Edition, Financial Accounting</p>
+                       <a href="./images/SAP FICO.jpg">ViewCertificate</a>
+                   </div>
+               </div>
+   
+               <div class="certify-box">
+                   <img src="./images/alexander-shatov-mr4JG4SYOF8-unsplash.jpg" alt="">
+                   <div class="certify-layer">
+                      
+                       <h4>Cybersecurity Fundamental</h4>
+                       <p>IBM Certified – Cybersecurity Fundamental.</p>
+                    <a href="./images/IBMDesign20260130-33-77y1dq_page-0001.jpg">ViewCertificate</a>
+                   </div>
+               </div>
+   
+               <div class="certify-box">
+                   <img src="./images/oracle.jpeg" alt="">
+                   <div class="certify-layer">
+                      
+                       <h4>AI Fundamentals</h4>
+                       <p>IBM Certified – AI Fundamentals</p>
+                      <a href="./images/AIFundamentalsFoundationsforUnderstandingAI_Badge20260130-30-nnbs0g_page-0001.jpg">ViewCertificate</a>
+                   </div>
+               </div>
+   
+               <div class="certify-box">
+                   <img src="./images/alexander-shatov-mr4JG4SYOF8-unsplash.jpg" alt="">
+                   <div class="certify-layer">
+                      
+                       <h4>CSS</h4>
+                       <p>Certified in CSS at IBM</p>
+                       <a href="./images/CSS.jpg">ViewCertificate</a>
+                   </div>
+               </div>
+                                            
+               <div class="certify-box">
+                <img src="./images/2.jpg" alt="">
+                <div class="certify-layer">
+                   
+                    <h4>JAVASCRIPT</h4>
+                    <p>Certified in Javascript at IBM</p>
+                    <a href="./images/Java script.jpg">ViewCertificate</a>
+                </div>
+            </div>
+
+
+           </div>
+       </section>
+
+        <!--Contact section-->
+        <section class="contact" id="contact">
+            <h2 class="heading">Contact <span>Me</span></h2>
+            <form action="#">
+                <div class="input-box">
+                    <input type="text" placeholder="Full Name">
+                    <input type="email" placeholder="Email Address">
+                </div>
+
+                <div class="input-box">
+                    <input type="number" placeholder="Mobile Number">
+                    <input type="text" placeholder="Email Subject">
+                </div>
+                <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+                <input type="submit" value="Send Message" class="btn">
+            </form>
+
+        </section>
+
+
+         <!--footer section-->
+
+      <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2026 by @Gunasekaran | All Rights Reserved.</p>
+        </div>
+
+        <div class="footer-icon">
+            <a href="#home"><i class="fa-solid fa-angle-up"></i></a>
+        </div>
+      </footer>
+
+
+        <!--scroll reveal-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+           <!--typed js-->
+     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+             <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+
+
+        <!--MAIN JS-->
+         <script src="main.js"></script>
+
+ 
+
+     
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
