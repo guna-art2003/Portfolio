@@ -197,7 +197,7 @@
                    
                     <h4>Text to Speech</h4>
                     <p>Developed using : HTML,CSS,JAVASCRIPT</p>
-                    <a href="https://github.com/harisanu787/text-to-talk">View Project</a>
+                    <a href="https://github.com/guna-art2003/text-to-talk">View Project</a>
                 </div>
             </div> -->
 
@@ -315,6 +315,7 @@
      
 </body>
 </html>
+
 
 
 
